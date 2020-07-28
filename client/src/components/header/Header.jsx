@@ -2,9 +2,7 @@ import React, {useContext} from 'react';
 
 import UserProvider from "../../contexts/userProvider";
 
-import { makeStyles } from '@material-ui/core/styles';
-
-import { AppBar, Toolbar, Typography, IconButton, MenuItem, Menu, Button, Avatar, Container} from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton, MenuItem, Menu, Button, Avatar, Container } from '@material-ui/core';
 import logo from '../../assets/resultify2.svg'
 import defaultPerson from '../../assets/noName.png'
 import { Link } from 'react-router-dom';
@@ -15,15 +13,17 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const userData = useContext(UserProvider.context);
+  const { userEmail, userName, photoUrl } = userData;
 
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
-    userData.userName ? (
+    userName ? (
       fetch('http://localhost:5000/auth/logout')
       .then(res => res.json())
       .then(res => {
         console.log(res);
+        // TODO: wtf, Can you make a normal logout?  
         window.location.reload();
       })
     ) : (
@@ -38,10 +38,9 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  
   return (
     <div style={{flexGrow: 1}} >
-    {console.log('header',userData)}
       <AppBar position="static" style={{ background:'transparent', backgroundImage: `url(${MenuBackgroundImage})`, justifyContent:'center', display:'flex',backgroundSize: '100% 65px' }}>
       <Container maxWidth='lg'>
         <Toolbar>
@@ -61,8 +60,13 @@ const Header = () => {
                 About 
               </Link>
             </MenuItem>
-          <Button color="inherit" onClick={handleClick}>{userData.userName ? 'Logout' : 'Login'}</Button>
-          {userData.userName && (
+            {userName && (
+                <MenuItem>
+                  <Button color="inherit" onClick={handleClick}>{'Logout'}</Button>
+                </MenuItem>
+              )
+            }
+          {userName && (
             <div>
               <IconButton
                 aria-label="account of current user"
@@ -71,7 +75,7 @@ const Header = () => {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <Avatar alt="Users photo" src={ userData.photoUrl ? userData.photoUrl : defaultPerson  } />
+                <Avatar alt="Users photo" src={ photoUrl ? photoUrl : defaultPerson  } />
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -88,8 +92,8 @@ const Header = () => {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem >{userData.userName}</MenuItem>
-                <MenuItem >{userData.userEmail ? userData.userEmail: 'Email here'}</MenuItem>
+                <MenuItem >{userName}</MenuItem>
+                <MenuItem >{userEmail ? userEmail: 'Email here'}</MenuItem>
               </Menu>
             </div>
           )}

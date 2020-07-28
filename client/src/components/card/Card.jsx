@@ -1,18 +1,16 @@
 import React from 'react';
-
+import {Card, CardActions, CardContent, Typography, Grid, SvgIcon } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import {Card, CardActions, CardContent, Typography, Link, CardMedia } from '@material-ui/core';
-import removeMe from '../../assets/Andriy.jpg'
+import GoogleButton from '../googleButton/GoogleButton';
+import { ReactComponent as ResLogoText } from '../../assets/resultify_logo_text.svg';
+import vikingIcon from '../../assets/viking-logo.png';
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    backgroundColor: 'transparent',
+    border:'none'
   },
   title: {
     fontSize: 14,
@@ -29,24 +27,25 @@ const OutlinedCard = () => {
   return (
     <Card className={classes.root} variant="outlined" style={{marginTop:75}}>
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-            Make your dream come true
-        </Typography>
-        <CardMedia
-        image={removeMe}
-        title="Paella dish"
-        style = {{height:300}}
-        />
-        <Typography variant="h5" component="h2">
-            With Resultify
-        </Typography>
-        <Typography variant="body2" component="p">
-          well meaning and kindly.
-        </Typography>
+        <Grid
+          container
+          direction="column"
+          justify="space-around"
+          alignItems="center"
+        >
+          <img src={vikingIcon} alt="Viking icon" style = {{height: '12vh'}}/>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+              Make your dream come true
+          </Typography>
+          <SvgIcon style={{width:'100%'}} viewBox='0 0 810.08 124.67' component={ResLogoText}/>
+          <Typography variant="body2" component="p">
+            well meaning and kindly.
+          </Typography>
+          <CardActions>
+            <GoogleButton />
+          </CardActions>
+        </Grid>
       </CardContent>
-      <CardActions>
-        <Link href="http://localhost:5000/api/drive" >Login with Google</Link>
-      </CardActions>
     </Card>
   );
 }
