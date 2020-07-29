@@ -1,13 +1,14 @@
 const passport = require('passport');
 const express = require('express');
-const cookieSession = require("cookie-session");
+//const cookieSession = require("cookie-session");
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const session = require('express-session');
 
 const authRotes = require('./routes/auth-routes');
 const apiRoutes = require('./routes/api-routes')
 const connectDB = require('./config/db')
 const keys = require('./config/keys');
-const cookieParser = require('cookie-parser');
 
 const port = process.env.port || 5000;
 
@@ -17,12 +18,14 @@ connectDB();
 
 const app = express();
 
-app.use(cookieSession({
-  // milliseconds of a day
-  name: "session",
-  maxAge: 24*60*60*1000,
-  keys:[keys.session.cookieKey]
-}));
+app.use(
+  session({
+    secret: [keys.session.cookieKey],
+    resave: false,
+    saveUninitialized: false,
+    store: false,
+  })
+)
 
 app.use(cookieParser());
 

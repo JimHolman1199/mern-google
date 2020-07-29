@@ -1,12 +1,22 @@
 const router = require('express').Router();
 const passport = require('passport');
 
+const SCOPE = [
+  'https://www.googleapis.com/auth/userinfo.profile', 
+  'https://www.googleapis.com/auth/userinfo.email', 
+  'https://www.googleapis.com/auth/drive'
+]
+
+// @desc  Auth with Google
+// @route GET /auth/google
 router.get('/google', passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/drive'],
+    scope: SCOPE,
     access_type: 'offline',
   })
 );
 
+// @desc  Google auth callback
+// @route GET /auth/google/callback
 router.get('/google/callback', 
   passport.authenticate("google"),
   (req,res)=>{
@@ -14,19 +24,27 @@ router.get('/google/callback',
   }
 );
 
-router.get('/user', async (req, res)=>{
+// @desc  Get user Data
+// @route GET /auth/user
+// @returns {obj}
+router.get('/user', (req, res) => {
   try {
-    console.log('get user', req.user)
     res.send(req.user)
   } catch (error) {
     console.error(error)  
   }
-  
 })
 
+// @desc  Return user data
+// @route GET /auth/logout
+// TODO: it does not work due to a express session
 router.get("/logout", (req, res) => {
   req.logout();
-  res.send({status:'logout'})
+  req.session.destroy((err) => {
+    if(err) console.log(err)
+    res.send({fuck:'bin laden'})
+    res.redirect('/')
+  });
 });
 
 module.exports = router;

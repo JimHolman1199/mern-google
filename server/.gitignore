@@ -12,6 +12,9 @@
 /build
 
 # misc
+'./config/keys.js'
+'./token.json'
+'./credentials.json'
 .DS_Store
 .env.local
 .env.development.local
