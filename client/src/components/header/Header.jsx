@@ -2,11 +2,13 @@ import React, {useContext} from 'react';
 
 import UserProvider from "../../contexts/userProvider";
 
-import { AppBar, Toolbar, Typography, IconButton, MenuItem, Menu, Button, Avatar, Container } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton, MenuItem, Menu, Avatar, Container } from '@material-ui/core';
 import logo from '../../assets/resultify2.svg'
 import defaultPerson from '../../assets/noName.png'
 import { Link } from 'react-router-dom';
 import MenuBackgroundImage from '../../assets/menu.png'
+
+import './header.scss';
 
 const Header = () => {
 
@@ -51,18 +53,18 @@ const Header = () => {
             Google Data Studio links
           </Typography>
             <MenuItem>
-              <Link to ='/'>
+              <Link to ='/' className='menu-link'>
                 Home
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link to ='/about'>
+              <Link to ='/about' className='menu-link'>
                 About 
               </Link>
             </MenuItem>
             {userName && (
                 <MenuItem>
-                  <Button color="inherit" onClick={handleClick}>{'Logout'}</Button>
+                  <Link to='' onClick={handleClick} className='menu-link'>Logout</Link>
                 </MenuItem>
               )
             }

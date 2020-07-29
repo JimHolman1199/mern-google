@@ -21,12 +21,18 @@ Technologies used in this application
 
 
 ```bash
-git clone ...
+git clone git@github.com:JimHolman1199/mern-google.git
 ```
 
 ## Usage
 
 ```
+cd server
+  npm i 
+cd client 
+  npm i
+
+go to the root folder and run:: 
 npm start
 ```
 

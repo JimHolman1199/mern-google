@@ -6,20 +6,19 @@ import UserProvider from './contexts/userProvider';
 import HomePage from './page/home/HomePage';
 import AboutPage from './page/about/AboutPage'
 import Header from './components/header/Header';
-import BackPhoto from './assets/viking.png';
-import bagroundAshes from './assets/ashes.png';
-import fireImage from './assets/FlatFancyBufflehead-size_restricted.gif'
+
 import './App.scss';
 
-
-const App= ({user}) => {
+const App= () => {
   return (
-    <div style={{backgroundImage:`url(${BackPhoto}), url(${fireImage})`,height:'100vh', backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
+    <div>
     <UserProvider  >
       <Header />
     </UserProvider>
       <Switch>
-        <Route exact path='/' component={HomePage} />
+        <UserProvider  >
+          <Route exact path='/' component={HomePage} />
+        </UserProvider>
         <Route path='/about' component={AboutPage} />
       </Switch>
     </div>
