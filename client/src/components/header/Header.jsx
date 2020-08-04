@@ -6,7 +6,6 @@ import { AppBar, Toolbar, Typography, IconButton, MenuItem, Menu, Avatar, Contai
 import logo from '../../assets/resultify2.svg'
 import defaultPerson from '../../assets/noName.png'
 import { Link } from 'react-router-dom';
-import MenuBackgroundImage from '../../assets/menu.png'
 
 import './header.scss';
 
@@ -42,8 +41,8 @@ const Header = () => {
   };
   
   return (
-    <div style={{flexGrow: 1}} >
-      <AppBar position="static" style={{ background:'transparent', backgroundImage: `url(${MenuBackgroundImage})`, justifyContent:'center', display:'flex',backgroundSize: '100% 65px' }}>
+    <div className='global_header' >
+      <AppBar position="static" className='header_menu'>
       <Container maxWidth='lg'>
         <Toolbar>
           <IconButton >

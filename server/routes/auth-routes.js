@@ -29,6 +29,7 @@ router.get('/google/callback',
 // @returns {obj}
 router.get('/user', (req, res) => {
   try {
+    console.log( 'Get user', req.user)
     res.send(req.user)
   } catch (error) {
     console.error(error)  
@@ -37,13 +38,11 @@ router.get('/user', (req, res) => {
 
 // @desc  Return user data
 // @route GET /auth/logout
-// TODO: it does not work due to a express session
 router.get("/logout", (req, res) => {
   req.logout();
   req.session.destroy((err) => {
     if(err) console.log(err)
-    res.send({fuck:'bin laden'})
-    res.redirect('/')
+    return res.send({logout:true})
   });
 });
 

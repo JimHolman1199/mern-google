@@ -4,12 +4,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import themeSettings from './config/theme.json';
+
+const theme = createMuiTheme(themeSettings);
 
 ReactDOM.render(
   <BrowserRouter>
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
+    <MuiThemeProvider theme={theme}>
+      <App />
+    </MuiThemeProvider>
   </BrowserRouter>,  
   document.getElementById('root')
 );
