@@ -2,16 +2,17 @@
   "name": "something",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm start\" "
   },
   "nodemonConfig": {
     "ext": "js"
   },
   "dependencies": {
-    "@google-cloud/local-auth": "^1.0.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "express-session": "^1.17.1",
     "googleapis": "^39.2.0",
