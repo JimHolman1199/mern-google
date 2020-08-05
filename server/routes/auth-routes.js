@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
+const { ensureAuth } = require('../middleware/auth');
 
 const SCOPE = [
   'https://www.googleapis.com/auth/userinfo.profile', 
@@ -27,7 +28,7 @@ router.get('/google/callback',
 // @desc  Get user Data
 // @route GET /auth/user
 // @returns {obj}
-router.get('/user', (req, res) => {
+router.get('/user', ensureAuth, (req, res) => {
   try {
     console.log( 'Get user', req.user)
     res.send(req.user)
@@ -36,14 +37,15 @@ router.get('/user', (req, res) => {
   }
 })
 
-// @desc  Return user data
+// @desc  Log out and delete the session
 // @route GET /auth/logout
 router.get("/logout", (req, res) => {
   req.logout();
-  req.session.destroy((err) => {
+  req.session.destroy((err)=>{
     if(err) console.log(err)
-    return res.send({logout:true})
-  });
+
+    res.redirect('/');
+  })
 });
 
 module.exports = router;

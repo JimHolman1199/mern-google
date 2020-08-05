@@ -5,14 +5,15 @@ import { Grid, Box } from '@material-ui/core';
 import OutlinedCard from '../../components/outlinedCard/OutlinedCard';
 import Table from '../../components/table/Table';
 
-import UserProvider from "../../contexts/userProvider";
+import CurrentUserContext from "../../contexts/current-user/current-user.context";
 
 import './homePage.scss'
 
 const HomePage = () => {
-    const userData = useContext(UserProvider.context);
+
+    const currentUser = useContext(CurrentUserContext);
     const [items, setItems] = useState([]);
-    console.log('HomePage', userData)
+
     useEffect(()=>{
         fetch('/api/drive')
         .then(res => res.json())
@@ -21,8 +22,8 @@ const HomePage = () => {
     }, [])
 
     return (
-        <div className={Object.entries(userData).length!==0 ? 'promo_wrapper_table':'promo_wrapper_main'} >
-        { Object.entries(userData).length !== 0 ? (
+        <div className={ currentUser ? 'promo_wrapper_table':'promo_wrapper_main'} >
+        { currentUser? (
             <Box mt={4}>
                 <Container maxWidth='lg'>
                     <Table itemsArr={items} />

@@ -1,28 +1,62 @@
-import React from 'react';
+import React from "react";
 
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route } from "react-router-dom";
 
-import UserProvider from './contexts/userProvider';
-import HomePage from './page/home/HomePage';
-import AboutPage from './page/about/AboutPage'
-import Header from './components/header/Header';
+import HomePage from "./page/home/HomePage";
+import AboutPage from "./page/about/AboutPage";
+import Header from "./components/header/Header";
+import CurrentUserContext from "./contexts/current-user/current-user.context";
 
-import './App.scss';
+import "./App.scss";
 
-const App= () => {
-  return (
-    <div>
-    <UserProvider  >
-      <Header />
-    </UserProvider>
-      <Switch>
-        <UserProvider  >
-          <Route exact path='/' component={HomePage} />
-        </UserProvider>
-        <Route path='/about' component={AboutPage} />
-      </Switch>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      currentUser: null,
+    };
+  }
+
+  componentDidMount() {
+    fetch("/auth/user")
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          currentUser: res
+        });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  
+
+  render() {
+    console.log('App', this.state.currentUser)
+    const changeUserState = () => {
+      this.setState({
+        currentUser: null
+      })
+    }
+
+    return (
+      <div>
+        <CurrentUserContext.Provider 
+          value={{
+            currentUser:this.state.currentUser,
+            changeUserState: changeUserState
+          }}>
+          <Header />
+        </CurrentUserContext.Provider>
+        <Switch>
+          <CurrentUserContext.Provider value={this.state.currentUser}>
+            <Route exact path="/" component={HomePage} />
+          </CurrentUserContext.Provider>
+          <Route path="/about" component={AboutPage} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
