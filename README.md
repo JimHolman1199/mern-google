@@ -38,7 +38,7 @@ npm start
 
 ## Roadmap
 - hm...
-
+- Get other data, such as a link to Google Sheet?
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 

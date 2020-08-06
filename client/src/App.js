@@ -29,10 +29,7 @@ class App extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  
-
   render() {
-    console.log('App', this.state.currentUser)
     const changeUserState = () => {
       this.setState({
         currentUser: null

@@ -39,7 +39,7 @@ router.get("/drive", (request, response) => {
 
     drive.files.list(
       {
-        pageSize: 20,
+        pageSize: 50,
         q: "mimeType = 'application/vnd.google-analytics.rap.report'",
         fields: "nextPageToken, files( name, webViewLink )",
         // modify "files" above to get more information about each file

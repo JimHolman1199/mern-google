@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 import { tableColumns, tableIcons } from './tableSettings';
 
@@ -29,6 +30,10 @@ const Table = ({ itemsArr, itemsArr:{items} }) => {
     });
   }
 
+  const handleOpenInNewTab = (event, rowData) => {
+    window.open(rowData.webViewLink,'_blank')
+  }
+
   return (
       <MaterialTable
         title="Data Studio Links"
@@ -38,7 +43,10 @@ const Table = ({ itemsArr, itemsArr:{items} }) => {
           exportButton: true,
           rowStyle: rowData => ({
             backgroundColor: (selectedRow === rowData.tableData.id) ? 'rgba(14, 79, 72, 1)' : '#FFF0'
-          })
+          }),
+          paging: false,
+          maxBodyHeight: '75vh',
+          headerStyle: { position: 'sticky', top: 0 },
         }}
         isLoading={loading}
         icons={tableIcons}
@@ -48,6 +56,10 @@ const Table = ({ itemsArr, itemsArr:{items} }) => {
             icon: FileCopyIcon,
             tooltip: 'Copy URL',
             onClick: handleCopyAction
+          },{
+            icon: OpenInNewIcon,
+            tooltip: 'Open in New Tab',
+            onClick: handleOpenInNewTab
           }
         ]}
       />
