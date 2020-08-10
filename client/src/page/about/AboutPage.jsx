@@ -1,18 +1,24 @@
-import React from 'react';
-import { Container, Box } from '@material-ui/core';
+import React from "react";
+import { Container, Box } from "@material-ui/core";
+import Typography from '@material-ui/core/Typography';
+
+import './aboutPage.scss'
 
 const AboutPage = () => (
-    <Box mt={8}>
-        <Container>
-            <p style={{color:'white'}}>
-                What is Lorem Ipsum?
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-            Why do we use it?
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-            </p>
+    <div className="promo_wrapper_table_v2">
+      <Box mt={4}>
+        <Container maxWidth="lg">
+            <Typography variant="h1" component="h2" gutterBottom>
+            What is Lorem Ipsum?
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+                body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
+                unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
+                dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+            </Typography>
         </Container>
-    </Box>
-)
+      </Box>
+    </div>
+);
 
 export default AboutPage;

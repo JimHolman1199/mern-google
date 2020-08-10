@@ -8,6 +8,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 export const tableColumns = [
   { title: 'webViewLink', field: 'webViewLink' },
@@ -23,4 +24,5 @@ export const tableIcons = {
   PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
   ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+  SortArrow: forwardRef((props, ref) => <ArrowDownwardIcon {...props} ref={ref} />)
 };

@@ -6,19 +6,19 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import themeSettings from './config/theme.json';
+import { SnackbarProvider } from 'notistack';
 
 const theme = createMuiTheme(themeSettings);
 
 ReactDOM.render(
   <BrowserRouter>
     <MuiThemeProvider theme={theme}>
-      <App />
+      <SnackbarProvider>
+        <App />
+      </SnackbarProvider>
     </MuiThemeProvider>
   </BrowserRouter>,  
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();

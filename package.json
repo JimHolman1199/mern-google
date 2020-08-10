@@ -2,9 +2,8 @@
   "name": "something",
   "version": "1.0.0",
   "scripts": {
-    "client": "cd client && npm start",
-    "server": "cd server && npm start",
-    "start": "concurrently --kill-others \"npm run client\" \"npm run server\""
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "cd client && npm install && cd server && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "nodemonConfig": {
     "ext": "js"

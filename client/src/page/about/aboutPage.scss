@@ -1,0 +1,44 @@
+@keyframes inner-circle-moves {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
+.promo_wrapper_table_v2 {
+    color: #fff;
+    background: url('../../assets/runes-bg.png') 50% no-repeat;
+    background-size: 55% auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+	justify-content: center;
+    
+    &:before {
+        animation: inner-circle-moves 100s reverse linear infinite;
+        background: url('../../assets/runes-round.png') 100% no-repeat;
+        background-size: 100% auto;
+        pointer-events: none;
+        transform: translate(-50%,-50%);
+        width: 40%;
+        height: 40%;
+        opacity: 1;
+        position: absolute;
+        content: '';
+    }
+
+    &:after {
+        animation: inner-circle-moves 100s linear infinite;
+        background: url('../../assets/runes-center.png') 100% no-repeat;
+        background-size: 100% auto;
+        transform: translate(-50%,-50%);
+        pointer-events: none;
+        width: 40%;
+        height: 40%;
+        opacity: 1;
+        position: absolute;
+        content: '';
+    }
+}
