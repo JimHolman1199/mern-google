@@ -15,18 +15,28 @@ class App extends React.Component {
 
     this.state = {
       currentUser: null,
+      tableData : null
     };
   }
 
   componentDidMount() {
-    fetch("/auth/user")
+    if(!this.state.currentUser){
+      fetch("/auth/user")
       .then((res) => res.json())
       .then((res) => {
         this.setState({
           currentUser: res
         });
+        fetch("/api/drive")
+          .then((res) => res.json())
+          .then(res=>{
+            this.setState({
+              tableData: res.items
+            })
+          })
       })
       .catch((err) => console.log(err));
+    }
   }
 
   render() {
@@ -46,10 +56,12 @@ class App extends React.Component {
           <Header />
         </CurrentUserContext.Provider>
         <Switch>
-          <CurrentUserContext.Provider value={this.state.currentUser}>
-            <Route exact path="/" component={HomePage} />
-          </CurrentUserContext.Provider>
           <Route path="/about" component={AboutPage} />
+          <CurrentUserContext.Provider value={this.state.currentUser}>
+            <Route exact path="/" >
+              <HomePage data = {this.state.tableData} />
+            </Route>
+          </CurrentUserContext.Provider>
         </Switch>
       </div>
     );

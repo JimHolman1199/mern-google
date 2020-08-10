@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const session = require('express-session');
 const bodyParser= require('body-parser');
+const enforce = require('express-sslify');
+const compression = require('compression');
 
 const path = require('path');
 const authRotes = require('./routes/auth-routes');
@@ -49,12 +51,18 @@ app.use('/auth', authRotes)
 app.use('/api', apiRoutes)
 
 if (process.env.NODE_ENV === 'production') {
+  app.use(compression);
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
   app.use(express.static(path.join(__dirname,'client/build')));
 
   app.get('*', (req, res)=>{
     res.sendFile(path.join(__dirname, 'client/build','index.html'))
   })
 }
+
+app.get('/service-worker.js', (req, res)=>{
+  res.sendFile(path.resolve(__dirname,'..', 'build', 'service-worker.js'));
+})
 
 app.listen(port, (err) => {
   if(err) throw err;

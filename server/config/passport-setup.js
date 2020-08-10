@@ -4,7 +4,7 @@ const fs = require('fs');
 const User = require('../models/user.models');
 
 const TOKEN_PATH = 'token.json';
-const SCOPE = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/drive';
+const SCOPE = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/drive.metadata.readonly';
 
 module.exports = function(passport){
 
@@ -44,12 +44,10 @@ module.exports = function(passport){
                         }
                         fs.writeFile(TOKEN_PATH, JSON.stringify(data), (err)=>{
                             if(err)console.log('error storing token', err)
-                            console.log('Token stored to token.json')
                         })
                     });
 
                     if(currentUser){
-                        console.log('currentUser',currentUser)
                         done(null, currentUser)
                     }else{
                         //create new User in DB
@@ -60,7 +58,6 @@ module.exports = function(passport){
                             userEmail: profile._json.email,
                             refreshToken:refreshToken
                         }).save().then(newUser=>{
-                            console.log('newUser', newUser);
                             done(null, newUser)
                         })
                     }

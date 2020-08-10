@@ -5,7 +5,7 @@ const { ensureAuth } = require('../middleware/auth');
 const SCOPE = [
   'https://www.googleapis.com/auth/userinfo.profile', 
   'https://www.googleapis.com/auth/userinfo.email', 
-  'https://www.googleapis.com/auth/drive'
+  'https://www.googleapis.com/auth/drive.metadata.readonly'
 ]
 
 // @desc  Auth with Google
@@ -30,7 +30,6 @@ router.get('/google/callback',
 // @returns {obj}
 router.get('/user', ensureAuth, (req, res) => {
   try {
-    console.log( 'Get user', req.user)
     res.send(req.user)
   } catch (error) {
     console.error(error)  

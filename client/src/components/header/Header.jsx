@@ -27,13 +27,6 @@ const Header = () => {
 
   const handleClick = (event) => {
     changeUserState();
-    // fetch("http://localhost:5000/auth/logout")
-    //   .then((res) => {
-    //     changeUserState();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
 
   const handleMenu = (event) => {
