@@ -11,7 +11,8 @@ import {
   Container,
 } from "@material-ui/core";
 
-import CurrentUserContext from "../../contexts/current-user/current-user.context";
+import { UserContext } from "../../providers/user/UserProvider";
+
 import logo from "../../assets/resultify2.svg";
 import defaultPerson from "../../assets/noName.png";
 
@@ -20,13 +21,12 @@ import "./header.scss";
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const { currentUser } = useContext(CurrentUserContext);
-  const { changeUserState } = useContext(CurrentUserContext);
+  const { user, setCurrentUser } = useContext(UserContext);
 
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
-    changeUserState();
+    setCurrentUser();
   };
 
   const handleMenu = (event) => {
@@ -58,7 +58,7 @@ const Header = () => {
                 About
               </Link>
             </MenuItem>
-            {currentUser && (
+            {user && (
               <React.Fragment>
                 <MenuItem>
                   <a href="/auth/logout" onClick={handleClick} className="menu-link">
@@ -76,8 +76,8 @@ const Header = () => {
                     <Avatar
                       alt="Users photo"
                       src={
-                        currentUser.photoUrl
-                          ? currentUser.photoUrl
+                        user.photoUrl
+                          ? user.photoUrl
                           : defaultPerson
                       }
                     />
@@ -97,10 +97,10 @@ const Header = () => {
                     open={open}
                     onClose={handleClose}
                   >
-                    <MenuItem>{currentUser.userName}</MenuItem>
+                    <MenuItem>{user.userName}</MenuItem>
                     <MenuItem>
-                      {currentUser.userEmail
-                        ? currentUser.userEmail
+                      {user.userEmail
+                        ? user.userEmail
                         : "Email here"}
                     </MenuItem>
                   </Menu>

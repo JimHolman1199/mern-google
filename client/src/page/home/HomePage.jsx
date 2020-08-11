@@ -5,20 +5,23 @@ import { Grid, Box } from "@material-ui/core";
 import OutlinedCard from "../../components/outlinedCard/OutlinedCard";
 import Table from "../../components/table/Table";
 
-import CurrentUserContext from "../../contexts/current-user/current-user.context";
+import { UserContext } from "../../providers/user/UserProvider";
+import { TableContext } from "../../providers/data/DataProvider";
 
 import "./homePage.scss";
 
-const HomePage = ({data}) => {
-  const currentUser = useContext(CurrentUserContext);
+const HomePage = () => {
+  
+  const { user } = useContext(UserContext);
+  const { data } = useContext(TableContext);
 
   return (
     <React.Fragment>
-      {currentUser ? (
+      {user ? (
         <div className="promo_wrapper_table">
           <Box mt={4}>
             <Container maxWidth="lg">
-              <Table data={data}/>
+              <Table data={data} />
             </Container>
           </Box>
         </div>

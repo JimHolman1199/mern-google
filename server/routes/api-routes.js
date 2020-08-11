@@ -54,8 +54,7 @@ router.get("/drive", (request, response) => {
 
         if (files.length) {
           return response.send({ 
-            items: files,
-            nextPageToken
+            items: files
            });
         } else {
           console.log("No files found.");
